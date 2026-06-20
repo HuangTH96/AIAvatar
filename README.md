@@ -36,6 +36,10 @@
     npm run build
     ```
     跑完去翻dist/assets/下生成的那个.css文件，打开扫一眼，应该能看到一堆-webkit-开头的reset样式（这是Tailwind的preflight），文件大小大概10KB上下；如果Tailwind没接上，这个css会很小（就原来模板自带那点样式，1-2KB左右）
+4. 添加 API Key
+    模板在 `.env.example`，将自己的API KEY放在 `.env`中；
+    
+    *TODO*：Vite中所有以 `VITE_` 开头的环境变量，build完会原样躺在发给浏览器的JS文件里，任何人打开devtools都能直接看到。.env只防止key进git历史，防不住别人看你的打包产物。所以现在这套"前端直接调Claude API"的写法，只能在你自己电脑上npm run dev本地用，以后这东西要是部署到服务器、或者构建产物分享出去，调用API这步必须挪到一个小后端去做代理，不能让key裸奔在前端代码里。
 
 
 ## 2. 布局构建：利用 Framer Motion 的 layout 属性实现形象容器从全屏到分屏的平滑过渡。
