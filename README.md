@@ -36,6 +36,8 @@
     npm run build
     ```
     跑完去翻dist/assets/下生成的那个.css文件，打开扫一眼，应该能看到一堆-webkit-开头的reset样式（这是Tailwind的preflight），文件大小大概10KB上下；如果Tailwind没接上，这个css会很小（就原来模板自带那点样式，1-2KB左右）
+
+    最后跑一下 `npm run dev` 查看是否能否登录跳出来的localhost连接
 4. 添加 API Key
     模板在 `.env.example`，将自己的API KEY放在 `.env`中；
     
@@ -43,7 +45,8 @@
 
 
 ## 2. 布局构建：利用 Framer Motion 的 layout 属性实现形象容器从全屏到分屏的平滑过渡。
-
+1. `src/components/Avatar.jsx` 根据传进来的expression这个prop，决定SVG里哪组五官是亮的（opacity:1），其它全是暗的（opacity:0）。
+2. `src/App.jsx` 这里要做三件事：*布局状态机*（mediaOpen控制全屏/分屏）、*表情状态*（expression，传给Avatar）、还有两个测试按钮模拟*AI指令*（真实LLM调用是第三步的事，现在先手动触发，验证状态机本身通不通）。
 
 
 ## 3. 协议联调：配置 System Prompt 强制 LLM 输出上述结构化 JSON。

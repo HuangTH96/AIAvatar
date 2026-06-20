@@ -1,122 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from 'react';
+import { LayoutGroup, AnimatePresence, motion } from 'framer-motion';
+import Avatar from './components/Avatar';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [mediaOpen, setMediaOpen] = useState(false);
+  const [expression, setExpression] = useState('neutral');
+  const [mediaCaption, setMediaCaption] = useState('');
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
+    <div className="w-screen h-screen bg-neutral-950 text-white flex overflow-hidden">
+      <LayoutGroup>
+        <motion.div layout className={`h-full flex-none ${mediaOpen ? 'w-1/3' : 'w-full'}`}>
+          <Avatar expression={expression} />
+        </motion.div>
+
+        <AnimatePresence>
+          {mediaOpen && (
+            <motion.div
+              key="media"
+              layout
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="w-2/3 h-full flex-none border-l border-neutral-800 flex flex-col items-center justify-center relative"
+            >
+              <button
+                onClick={() => setMediaOpen(false)}
+                className="absolute top-4 right-4 bg-amber-400 text-black px-4 py-2 rounded-full text-sm font-medium"
+              >
+                ✕ 收起
+              </button>
+              <div className="aspect-video w-2/3 bg-neutral-800 rounded-xl" />
+              <p className="mt-4 text-sm text-neutral-400">{mediaCaption}</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </LayoutGroup>
+
+      {/* 测试用，第三步接上LLM之后这两个按钮就没用了，删掉就行 */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3">
         <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+          onClick={() => { setExpression('happy'); setMediaCaption('示意图占位'); setMediaOpen(true); }}
+          className="bg-blue-600 px-4 py-2 rounded-full"
         >
-          Count is {count}
+          模拟AI：展示图片
         </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        <button onClick={() => setExpression('thinking')} className="bg-neutral-700 px-4 py-2 rounded-full">
+          切换表情
+        </button>
+      </div>
+    </div>
+  );
 }
-
-export default App
