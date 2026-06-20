@@ -23,6 +23,8 @@
     npm install
 
     npm install framer-motion
+
+    npm install -D tailwindcss @tailwindcss/vite
     ```
     安装完成后，应该能看到文件夹出现以下结构：
     1. `node_modules/`：存放依赖的仓库
@@ -30,10 +32,10 @@
     3. `package.json` 项目配置
     4. `.gitignore`
 3. TEST
-    在Windows PowerShell中启动 Vite 服务器，并且点击跳出的 localhost 网页链接，看看能否正常打开。如果可以，则继续第二步
     ```
-    npm run dev
+    npm run build
     ```
+    跑完去翻dist/assets/下生成的那个.css文件，打开扫一眼，应该能看到一堆-webkit-开头的reset样式（这是Tailwind的preflight），文件大小大概10KB上下；如果Tailwind没接上，这个css会很小（就原来模板自带那点样式，1-2KB左右）
 
 
 ## 2. 布局构建：利用 Framer Motion 的 layout 属性实现形象容器从全屏到分屏的平滑过渡。
