@@ -10,6 +10,25 @@
 # 开发流程
 
 ## 1. 环境初始化：使用 Vite + React 配置开发环境，并通过 .env 进行 API Key 的隔离管理。
+1. 对于JS开发，需要用到 *npm* 而不 *conda* 进行依赖管理。Node.js 是一个运行环境，而 npm 是它自带的包管理器。 所以先安装Node.js 到系统，在Windows PowerShell中输入以下命令，查看是否安装成功
+    ```
+    node -v 
+    npm -v 
+    ```
+2. 创建项目模板，安装依赖以及交互核心插件。
+    ```
+    npm create vite@latest virtual-avartar-ai -- --template react
+    
+    cd virtual-avatar-ai
+    npm install
+
+    npm install framer-motion
+    ```
+    安装完成后，应该能看到文件夹出现以下结构：
+    1. `node_modules/`：存放依赖的仓库
+    2. `src/`: 源码
+    3. `package.json` 项目配置
+    4. `.gitignore`
 
 
 
