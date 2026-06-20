@@ -29,7 +29,11 @@
     2. `src/`: 源码
     3. `package.json` 项目配置
     4. `.gitignore`
-
+3. TEST
+    在Windows PowerShell中启动 Vite 服务器，并且点击跳出的 localhost 网页链接，看看能否正常打开。如果可以，则继续第二步
+    ```
+    npm run dev
+    ```
 
 
 ## 2. 布局构建：利用 Framer Motion 的 layout 属性实现形象容器从全屏到分屏的平滑过渡。
